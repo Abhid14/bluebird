@@ -1,3 +1,14 @@
 .body {
   user-select: none;
 }
+
+.ma {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center
+}
+.la {
+  background-image: url("../a.png");
+}
