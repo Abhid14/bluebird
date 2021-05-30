@@ -1,0 +1,14 @@
+{
+    "bg": [
+        {
+            "name": "Ribbon",
+            "folder": "ribbon",
+            "page": "ribbon.html"
+        },
+        {
+            "name": "Sakura",
+            "folder": "sakura",
+            "page": "sakura.html"
+        }
+    ]
+}

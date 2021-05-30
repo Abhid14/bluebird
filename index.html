@@ -13,23 +13,50 @@
 <body>
     <div id="app">
         <div class="views safe-areas" id="app-view">
-            <div class="view view-main view-init ma">
-                <div id="a" style="  border-style: dotted;
-                border-radius: 20px;
-                width: 300px;
-                height: 200px;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                align-content: center" class="ripple button la">
-                    <h1 style="color: white;">Hii</h1>
+            <div id="div1" class="view view-main view-init">
+                <div class="page">
+                    <div id="uiHead" class="uiHead">
+                        <div class="uiHeadPadding"></div>
+                        <div class="uiHeadCont">
+                            <p class="uiHeadTitle margin-top no-margin-bottom text-color-white">
+                                Apps & Games
+                            </p>
+                            <div class="uiHeadStat">
+                                <p id="weatherDisplay" onload="getWeather()"
+                                    class="wDisp margin-top no-margin-bottom text-color-white">
+                                </p>
+                                <p id="clockDisplay" onload="showTime()"
+                                    class="cDisp margin-top no-margin-bottom text-color-white">
+                            </div>
+                        </div>
+                        <div class="swiper-container apps-slide demo-swiper">
+                            <p class="text-color-white appName" id="appName">
+                                Home
+                            </p>
+                            <div id="appWrapper" class="swiper-wrapper appWrapper">
+                                <div class="swiper-slide"></div>
+                                <div class="swiper-slide"></div>
+                                <div class="swiper-slide"></div>
+                                <div class="swiper-slide">
+                                    <img id="a0" data-name="Home" class="appCont appActive" src="./img/home.jpg">
+                                </div>
+                            </div>
+                        </div>
+                        <button id="playB"
+                            class="button button-outline button-large button-fill text-color-black color-white button-round button-raised appStart">Play</button>
+                    </div>
+                    <div class="swiper-container background-slide demo-swiper">
+                        <div id="bgWrapper" class="swiper-wrapper">
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    <script src="./js/jquery-3.6.0.min.js"></script>
     <script defer src="./js/framework7.bundle.min.js"></script>
     <script defer src="./js/routes.js"></script>
+    <script src="./js/joypad.min.js"></script>
     <script defer src="./js/app.js"></script>
 </body>
 

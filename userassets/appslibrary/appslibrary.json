@@ -1,0 +1,82 @@
+{
+    "apps": [
+        {
+            "name": "Shadow Of The Tomb Raider",
+            "folder": "sotr",
+            "icon": "sotr.png",
+            "bg": "bg.jpg"
+        },
+        {
+            "name": "Hitman 3",
+            "folder": "hitman3",
+            "icon": "hitman3.jpg",
+            "bg": "bg.jpg"
+        },
+        {
+            "name": "F1 2018",
+            "folder": "f12018",
+            "icon": "f12018.jpg",
+            "bg": "bg.jpg"
+        },
+        {
+            "name": "FIFA19",
+            "folder": "fifa19",
+            "icon": "fifa19.jpg",
+            "bg": "bg.png"
+        },
+        {
+            "name": "Forza Horizon 3",
+            "folder": "fh3",
+            "icon": "fh3.jpg",
+            "bg": "bg.jpg"
+        },
+        {
+            "name": "Need For Speed Rivals",
+            "folder": "nfsrivals",
+            "icon": "nfsrivals.png",
+            "bg": "bg.jpg"
+        },
+        {
+            "name": "Grand Theft Auto 5",
+            "folder": "gta5",
+            "icon": "gta5.png",
+            "bg": "bg.jpg"
+        },
+        {
+            "name": "Ride 4",
+            "folder": "ride4",
+            "icon": "ride4.jpg",
+            "bg": "bg.jpg"
+        },
+        {
+            "name": "Rocket League",
+            "folder": "rocketleague",
+            "icon": "rocketleague.jpg",
+            "bg": "bg.jpg"
+        },
+        {
+            "name": "Trackmania Next",
+            "folder": "trackmanianext",
+            "icon": "trackmanianext.png",
+            "bg": "bg.jpg"
+        }, 
+        {
+            "name": "Epic Games Store",
+            "folder": "epicgames",
+            "icon": "epicgames.jpg",
+            "bg": "bg.jpg"
+        }, 
+        {
+            "name": "Steam",
+            "folder": "steam",
+            "icon": "steam.png",
+            "bg": "bg.png"
+        }, 
+        {
+            "name": "Ubisoft Store",
+            "folder": "uplay",
+            "icon": "uplay.png",
+            "bg": "bg.jpg"
+        }
+    ]
+}

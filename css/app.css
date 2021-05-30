@@ -1,14 +1,115 @@
 .body {
   user-select: none;
 }
-
-.ma {
+.page {
+  position: relative;
+  user-select: none;
+}
+.uiHead {
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+  z-index: 12;
+}
+.uiHeadPadding {
+  height: 4vh;
+}
+.uiHeadCont {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 4vw;
+  margin-right: 4vw;
+}
+.uiHeadTitle {
+  font-size: 8vh;
+}
+.uiHeadStat {
+  display: flex;
+  flex-direction: row;
+}
+.wDisp {
+  font-size: 8vh;
+}
+.cDisp {
+  font-size: 8vh;
+}
+.wDisp::before {
+  content: var(--before-content);
+}
+.apps-slide {
+  display: flex;
+  flex-direction: row;
+  height: 40vh;
+  width: 85vw;
+  margin-left: 3vw;
+}
+.appName {
+  margin-top: 17vh;
+  margin-left: 16.1vw;
+  font-size: 5vh;
+  position: absolute;
+}
+.appStart {
+  display: none;
+  margin-top: 26vh;
+  font-size: 3vh;
+  margin-left: 7vw;
+  height: 3vw;
+  width: 7vw;
+  z-index: 13;
+  position: absolute;
+}
+.appWrapper {
+  margin-left: 2vw;
+  margin-top: 1vw;
+}
+.appCont {
+  background-size: auto;
+  border-radius: 15%;
+  border-style: solid;
+  width: 8vw;
+  height: 8vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  align-content: center
+  align-content: center;
 }
-.la {
-  background-image: url("../a.png");
+.appActive {
+  box-shadow: 0 0 0 rgba(17, 3, 98, 0.4);
+  transition: transform;
+  transform: scale(1.5);
+  transform-origin: top left;
+  animation: pulse 2s linear infinite;
+}
+@keyframes pulse {
+  70% {
+    box-shadow: 0 0 0 0.4vw rgba(255, 255, 255);
+  }
+}
+.background-slide {
+  position: absolute;
+  z-index: 8;
+  height: 100vh;
+  width: 100vw;
+}
+.appBgCont {
+  position: relative;
+  background-color: black;
+}
+.appBgImg {
+  opacity: 0.8;
+}
+.bgDynamic {
+  height: 100vh;
+  width: 100vw;
+  border: none;
+  z-index: 4;
+}
+.bgDynamicP {
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+  z-index: 9;
+  background: transparent;
 }
