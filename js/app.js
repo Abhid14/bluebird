@@ -112,6 +112,14 @@ var weatherCond = [
     },
   ],
 ];
+var navsound = new sound("./soundlibrary/systemsounds/navsound.mp3");
+var bgsound = new sound("./soundlibrary/backgroundsounds/ps5example.mp3");
+var bgRequest = new XMLHttpRequest();
+var appWrapper = document.getElementById('appWrapper')
+var bgWrapper = document.getElementById("bgWrapper")
+var bgMute = false;
+var isActive = false;
+var actTime;
 function insertWeather(wData) {
   if (wData.current.is_day) {
     var wCond = weatherCond[1][weatherCond[0][wData.current.condition.code]]["d"];
@@ -146,11 +154,10 @@ function sound(src) {
   this.stop = function () {
     this.sound.pause();
   }
+  this.loop = function () {
+    this.sound.setAttribute("loop", "");
+  }
 }
-var navsound = new sound("./soundlibrary/systemsounds/navsound.mp3");
-var bgRequest = new XMLHttpRequest();
-var appWrapper = document.getElementById('appWrapper')
-var bgWrapper = document.getElementById("bgWrapper")
 bgRequest.onreadystatechange = function () {
   if (this.readyState == 4 && this.status == 200) {
     bgLibrary = JSON.parse(this.response)
@@ -163,7 +170,7 @@ function insertBg(bData) {
   var bEl = `<div id="bgDynaCont" class="swiper-slide appBgCont"><iframe data-ix="0" id="bgDynamic" class="appBgImg bgDynamic"src="/userassets/backgroundlibrary/${bgData[0].folder}/${bgData[0].page}"></iframe><div class="bgDynamicP"></div></div>`
   bgWrapper.innerHTML += bEl
   for (i in appsData) {
-    var aEl = `<div class="swiper-slide"><img id="a${Number(i) + 1}" data-name="${appsData[i].name}" class="appCont" src="./userassets/appslibrary/${appsData[i].folder}/${appsData[i].icon}"></div>`
+    var aEl = `<div class="swiper-slide"><img onclick="switchApps(${Number(i) + 4})" id="a${Number(i) + 1}" data-name="${appsData[i].name}" class="appCont" src="./userassets/appslibrary/${appsData[i].folder}/${appsData[i].icon}"></div>`
     bEl = ` <div class="swiper-slide appBgCont"><img class="appBgImg"src="./userassets/appslibrary/${appsData[i].folder}/${appsData[i].bg}"></div>`
     appWrapper.innerHTML += aEl
     bgWrapper.innerHTML += bEl
@@ -182,7 +189,6 @@ function insertBg(bData) {
     slidesPerView: 6
   });
   appsSlide.slideTo(3)
-
 }
 function getBg() {
   bgRequest.open("GET", "./userassets/backgroundlibrary/bgassets.json", true);
@@ -204,13 +210,30 @@ function getApps() {
   appsRequest.send();
 }
 function switchApps(ix) {
-
+  navsound.play()
+  var acX = appsSlide.activeIndex
+  backgroundSlide.slideTo(ix - 3)
+  appsSlide.slideTo(ix)
+  document.getElementById(`a${acX - 3}`).classList.remove("appActive")
+  document.getElementById(`a${ix - 3}`).classList.add("appActive")
+  document.getElementById("appName").innerText = document.getElementById(`a${ix - 3}`).getAttribute("data-name")
+  document.getElementById('playB').style.display = "initial";
 }
 function getControls() {
   document.addEventListener('keydown', function (event) {
-    if (event.key === 'a' || event.key === "ArrowLeft") {
+    var acX = appsSlide.activeIndex
+    if (isActive == false) {
+      isActive = true
+      backgroundSlide.slideTo(acX - 3)
+      $(".uiHeadCont").fadeIn()
+      $(".apps-slide").fadeIn()
+      if (acX > 3) {
+        $(".appStart").fadeIn()
+      }
+    }
+    actTime = new Date().getTime()
+    if (event.key === 'a' || event.key === 'A' || event.key === "ArrowLeft") {
       navsound.play()
-      var acX = appsSlide.activeIndex
       if (acX > 3) {
         backgroundSlide.slidePrev()
         appsSlide.slidePrev()
@@ -222,8 +245,7 @@ function getControls() {
         document.getElementById('playB').style.display = "none";
       }
     }
-    if (event.key === 'd' || event.key === "ArrowRight") {
-      var acX = appsSlide.activeIndex
+    if (event.key === 'd' || event.key === 'D' || event.key === "ArrowRight") {
       navsound.play()
       if (acX < appNum) {
         backgroundSlide.slideNext()
@@ -237,27 +259,81 @@ function getControls() {
       }
     }
     if (event.key === ",") {
+      navsound.play()
       var bgDynamic = Number(document.getElementById("bgDynamic").getAttribute("data-ix"))
       if (bgDynamic > 0) {
-        document.getElementById("bgDynamic").style.display = "none";
-        document.getElementById("bgDynamic").remove
-        document.getElementById("bgDynaCont").innerHTML = `<iframe data-ix="${bgDynamic - 1}" id="bgDynamic" class="appBgImg bgDynamic"src="/userassets/backgroundlibrary/${bgData[bgDynamic - 1].folder}/${bgData[bgDynamic - 1].page}"></iframe>`
+        $("#bgDynamic").fadeOut()
+        setTimeout(function () {
+          document.getElementById("bgDynamic").remove
+          document.getElementById("bgDynaCont").innerHTML = `<iframe data-ix="${bgDynamic - 1}" id="bgDynamic" class="appBgImg bgDynamic"src="/userassets/backgroundlibrary/${bgData[bgDynamic - 1].folder}/${bgData[bgDynamic - 1].page}"></iframe>`
+        }, 2000)
       }
     }
     if (event.key === ".") {
+      navsound.play()
       var bgDynamic = Number(document.getElementById("bgDynamic").getAttribute("data-ix"))
       if (bgDynamic < bgData.length - 1) {
-        document.getElementById("bgDynamic").style.display = "none"; 
-        document.getElementById("bgDynamic").remove
-        document.getElementById("bgDynaCont").innerHTML = `<iframe data-ix="${bgDynamic + 1}" id="bgDynamic" class="appBgImg bgDynamic"src="/userassets/backgroundlibrary/${bgData[bgDynamic + 1].folder}/${bgData[bgDynamic + 1].page}"></iframe>`
+        $("#bgDynamic").fadeOut()
+        setTimeout(function () {
+          document.getElementById("bgDynamic").remove
+          document.getElementById("bgDynaCont").innerHTML = `<iframe data-ix="${bgDynamic + 1}" id="bgDynamic" class="appBgImg bgDynamic"src="/userassets/backgroundlibrary/${bgData[bgDynamic + 1].folder}/${bgData[bgDynamic + 1].page}"></iframe>`
+        }, 2000)
       }
+    }
+    if (event.key === "h" || event.key === 'H') {
+      if (acX > 3) {
+        backgroundSlide.slideTo(0)
+        appsSlide.slideTo(3)
+        document.getElementById(`a${acX - 3}`).classList.remove("appActive")
+        document.getElementById(`a0`).classList.add("appActive")
+        document.getElementById("appName").innerText = "Home"
+      }
+      if (appsSlide.activeIndex == 3) {
+        document.getElementById('playB').style.display = "none";
+      }
+    }
+    if (event.key === "m" || event.key === 'M') {
+      if (bgMute == false) {
+        bgsound.stop();
+        bgMute = true;
+      } else {
+        bgsound.play()
+        bgMute = false;
+      }
+    }
+    if (event.key === "q" || event.key === 'Q') {
+      isActive = false;
+      backgroundSlide.slideTo(0)
+      $(".uiHeadCont").fadeOut()
+      $(".apps-slide").fadeOut()
+      $(".appStart").fadeOut()
     }
   });
 }
 function initiateUI() {
-  getApps();
   showTime();
   getControls();
   getWeather();
+  setTimeout(function () {
+    getApps();
+    $(".background-slide").fadeIn()
+    $("#uiHead").fadeIn()
+    setInterval(function () {
+      if (isActive == true) {
+        if (new Date().getTime() - actTime > 50000) {
+          isActive = false;
+          backgroundSlide.slideTo(0)
+          $(".uiHeadCont").fadeOut()
+          $(".apps-slide").fadeOut()
+          $(".appStart").fadeOut()
+        }
+      }
+    }, 10000);
+    actTime = new Date().getTime()
+    isActive = true
+  }, 3000)
 }
+// work left play handler & local file mode
+bgsound.play();
+bgsound.loop()
 initiateUI()

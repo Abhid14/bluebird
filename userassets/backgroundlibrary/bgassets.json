@@ -6,9 +6,24 @@
             "page": "ribbon.html"
         },
         {
-            "name": "Sakura",
-            "folder": "sakura",
-            "page": "sakura.html"
+            "name": "Waves",
+            "folder": "waves",
+            "page": "waves.html"
+        },
+        {
+            "name": "Jelly Fish",
+            "folder": "jellyfish",
+            "page": "jellyfish.html"
+        },
+        {
+            "name": "Beautiful Stars",
+            "folder": "beautifulstars",
+            "page": "index.html"
+        },
+        {
+            "name": "Dolphins at dawn",
+            "folder": "dolphinsatdawn",
+            "page": "index.html"
         }
     ]
 }
