@@ -13,7 +13,6 @@ var bgWrapper = document.getElementById("bgWrapper")
 var bgMute = false;
 var isActive = false;
 var actTime;
-var ws = new WebSocket("ws://127.0.0.1:5678/");
 var weatherCond = [
   {
     1000: 0,
@@ -344,6 +343,10 @@ function initiateUI() {
     getWeather();
   } catch { ; }
 }
+bgsound.play();
+bgsound.loop()
+initiateUI();
+var ws = new WebSocket("ws://127.0.0.1:5678/");
 ws.onmessage = function (event) {
   isActive = false;
   backgroundSlide.slideTo(0)
@@ -358,7 +361,3 @@ ws.onclose = function (event) {
   document.getElementById("appName").setAttribute("onclick", "window.location.reload()")
   document.getElementById("appName").id = "errormsg"
 };
-// work left play handler
-bgsound.play();
-bgsound.loop()
-initiateUI();
