@@ -13,6 +13,7 @@ var bgWrapper = document.getElementById("bgWrapper")
 var bgMute = false;
 var isActive = false;
 var actTime;
+var ws = new WebSocket("ws://127.0.0.1:5678/");
 var weatherCond = [
   {
     1000: 0,
@@ -320,7 +321,6 @@ function startApp() {
 };
 function initiateUI() {
   showTime();
-  getControls();
   setTimeout(function () {
     getApps();
     $(".background-slide").fadeIn()
@@ -339,11 +339,11 @@ function initiateUI() {
     actTime = new Date().getTime()
     isActive = true
   }, 3000)
-  //try {
-  getWeather();
-  //} catch { ; }
+  getControls();
+  try {
+    getWeather();
+  } catch { ; }
 }
-var ws = new WebSocket("ws://127.0.0.1:5678/");
 ws.onmessage = function (event) {
   isActive = false;
   backgroundSlide.slideTo(0)
@@ -354,7 +354,7 @@ ws.onmessage = function (event) {
 }
 ws.onclose = function (event) {
   $(".appStart").fadeOut()
-  document.getElementById("appName").innerText = "Error :( Blue Bird server is not running. Restart server and click here to refresh!"
+  document.getElementById("appName").innerText = "Error :( Bluebird server is not running. Restart server and click here to refresh!"
   document.getElementById("appName").setAttribute("onclick", "window.location.reload()")
   document.getElementById("appName").id = "errormsg"
 };
