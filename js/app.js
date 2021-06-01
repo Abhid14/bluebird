@@ -349,14 +349,13 @@ initiateUI();
 var ws = new WebSocket("ws://127.0.0.1:5678/");
 ws.onmessage = function (event) {
   isActive = false;
-  backgroundSlide.slideTo(0)
   $(".uiHeadCont").fadeOut()
   $(".apps-slide").fadeOut()
   $(".appStart").fadeOut()
   bgsound.stop()
 }
 ws.onclose = function (event) {
-  $(".appStart").fadeOut()
+  $(".appStart").remove()
   document.getElementById("appName").innerText = "Error :( Bluebird server is not running. Restart server and click here to refresh!"
   document.getElementById("appName").setAttribute("onclick", "window.location.reload()")
   document.getElementById("appName").id = "errormsg"
