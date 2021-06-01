@@ -5,30 +5,14 @@ app = new Framework7({
   theme: "md",
   routes,
 });
-function showTime() {
-  var date = new Date();
-  var h = date.getHours(); // 0 - 23
-  var m = date.getMinutes(); // 0 - 59
-  var session = "AM";
-
-  if (h == 0) {
-    h = 12;
-  }
-
-  if (h > 12) {
-    h = h - 12;
-    session = "PM";
-  }
-
-  h = (h < 10) ? "0" + h : h;
-  m = (m < 10) ? "0" + m : m;
-  var time = h + ":" + m + " " + session;
-  document.getElementById("clockDisplay").innerText = time;
-  document.getElementById("clockDisplay").textContent = time;
-
-  setTimeout(showTime, 1000);
-
-}
+var navsound = new sound("./soundlibrary/systemsounds/navsound.mp3");
+var bgsound = new sound("./soundlibrary/backgroundsounds/ps5example.mp3");
+var bgRequest = new XMLHttpRequest();
+var appWrapper = document.getElementById('appWrapper')
+var bgWrapper = document.getElementById("bgWrapper")
+var bgMute = false;
+var isActive = false;
+var actTime;
 var weatherCond = [
   {
     1000: 0,
@@ -112,14 +96,30 @@ var weatherCond = [
     },
   ],
 ];
-var navsound = new sound("./soundlibrary/systemsounds/navsound.mp3");
-var bgsound = new sound("./soundlibrary/backgroundsounds/ps5example.mp3");
-var bgRequest = new XMLHttpRequest();
-var appWrapper = document.getElementById('appWrapper')
-var bgWrapper = document.getElementById("bgWrapper")
-var bgMute = false;
-var isActive = false;
-var actTime;
+function showTime() {
+  var date = new Date();
+  var h = date.getHours(); // 0 - 23
+  var m = date.getMinutes(); // 0 - 59
+  var session = "AM";
+
+  if (h == 0) {
+    h = 12;
+  }
+
+  if (h > 12) {
+    h = h - 12;
+    session = "PM";
+  }
+
+  h = (h < 10) ? "0" + h : h;
+  m = (m < 10) ? "0" + m : m;
+  var time = h + ":" + m + " " + session;
+  document.getElementById("clockDisplay").innerText = time;
+  document.getElementById("clockDisplay").textContent = time;
+
+  setTimeout(showTime, 1000);
+
+}
 function insertWeather(wData) {
   if (wData.current.is_day) {
     var wCond = weatherCond[1][weatherCond[0][wData.current.condition.code]]["d"];
@@ -130,9 +130,13 @@ function insertWeather(wData) {
   document.getElementById("weatherDisplay").innerText = ' ' + wData.current.feelslike_c.toString().split(".")[0] + '° C〡'
 }
 function getWeather() {
-  weatherRequest.open("GET", "https://api.weatherapi.com/v1/current.json?key=1d88cb9bf5894e7a97b175605212805&q=Anekal&aqi=no", true);
-  weatherRequest.send();
-  setTimeout(getWeather, 100000)
+  $.getJSON("https://api.ipify.org?format=json",
+    function (data) {
+      var geoip = data.ip
+      weatherRequest.open("GET", "https://api.weatherapi.com/v1/current.json?key=1d88cb9bf5894e7a97b175605212805&q=" + geoip + "&aqi=no", true);
+      weatherRequest.send();
+      setTimeout(getWeather, 100000)
+    })
 }
 var weatherRequest = new XMLHttpRequest();
 weatherRequest.onreadystatechange = function () {
@@ -310,10 +314,13 @@ function getControls() {
     }
   });
 }
+function startApp() {
+  var acX = appsSlide.activeIndex - 4
+  ws.send(appsData[acX].folder)
+};
 function initiateUI() {
   showTime();
   getControls();
-  getWeather();
   setTimeout(function () {
     getApps();
     $(".background-slide").fadeIn()
@@ -332,8 +339,26 @@ function initiateUI() {
     actTime = new Date().getTime()
     isActive = true
   }, 3000)
+  //try {
+  getWeather();
+  //} catch { ; }
 }
-// work left play handler & local file mode
+var ws = new WebSocket("ws://127.0.0.1:5678/");
+ws.onmessage = function (event) {
+  isActive = false;
+  backgroundSlide.slideTo(0)
+  $(".uiHeadCont").fadeOut()
+  $(".apps-slide").fadeOut()
+  $(".appStart").fadeOut()
+  bgsound.stop()
+}
+ws.onclose = function (event) {
+  $(".appStart").fadeOut()
+  document.getElementById("appName").innerText = "Error :( Blue Bird server is not running. Restart server and click here to refresh!"
+  document.getElementById("appName").setAttribute("onclick", "window.location.reload()")
+  document.getElementById("appName").id = "errormsg"
+};
+// work left play handler
 bgsound.play();
 bgsound.loop()
-initiateUI()
+initiateUI();

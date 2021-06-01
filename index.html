@@ -17,36 +17,46 @@
                     <div id="uiHead" class="uiHead">
                         <div class="uiHeadPadding"></div>
                         <div class="uiHeadCont">
-                            <p class="uiHeadTitle margin-top no-margin-bottom text-color-white">
+                            <p class="
+                    uiHeadTitle
+                    margin-top
+                    no-margin-bottom
+                    text-color-white
+                  ">
                                 Apps & Games
                             </p>
                             <div class="uiHeadStat">
                                 <p id="weatherDisplay" onload="getWeather()"
-                                    class="wDisp margin-top no-margin-bottom text-color-white">
-                                </p>
+                                    class="wDisp margin-top no-margin-bottom text-color-white"></p>
                                 <p id="clockDisplay" onload="showTime()"
-                                    class="cDisp margin-top no-margin-bottom text-color-white">
+                                    class="cDisp margin-top no-margin-bottom text-color-white"></p>
                             </div>
                         </div>
                         <div class="swiper-container apps-slide demo-swiper">
-                            <p class="text-color-white appName" id="appName">
-                                Home
-                            </p>
+                            <p class="text-color-white appName" id="appName">Home</p>
                             <div id="appWrapper" class="swiper-wrapper appWrapper">
                                 <div class="swiper-slide"></div>
                                 <div class="swiper-slide"></div>
                                 <div class="swiper-slide"></div>
                                 <div class="swiper-slide">
-                                    <img id="a0" data-name="Home" class="appCont appActive" src="./img/home.jpg">
+                                    <img id="a0" data-name="Home" class="appCont appActive" src="./img/home.jpg" />
                                 </div>
                             </div>
                         </div>
-                        <a href="bluebird:" id="playB" target="_blank"
-                            class="button button-outline button-large button-fill text-color-black link external color-white button-round button-raised appStart">Play</a>
+                        <button onclick="startApp()" id="playB" class="
+                  button button-outline button-large button-fill
+                  text-color-black
+                  link
+                  external
+                  color-white
+                  button-round button-raised
+                  appStart
+                ">
+                            Play
+                        </button>
                     </div>
                     <div class="swiper-container background-slide demo-swiper">
-                        <div id="bgWrapper" class="swiper-wrapper">
-                        </div>
+                        <div id="bgWrapper" class="swiper-wrapper"></div>
                     </div>
                 </div>
             </div>
