@@ -20,9 +20,19 @@
             "folder": "beautifulstars",
             "page": "index.html"
         },
-        {
-            "name": "Dolphins at dawn",
-            "folder": "dolphinsatdawn",
+	{
+            "name": "sh1",
+            "folder": "sh1",
+            "page": "index.html"
+        },
+	{
+            "name": "ns1",
+            "folder": "ns1",
+            "page": "index.html"
+        },
+	{
+            "name": "sm1",
+            "folder": "sm1",
             "page": "index.html"
         }
     ]

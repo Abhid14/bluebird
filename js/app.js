@@ -13,6 +13,7 @@ var bgWrapper = document.getElementById("bgWrapper")
 var bgMute = false;
 var isActive = false;
 var actTime;
+var weatherOn = false
 var weatherCond = [
   {
     1000: 0,
@@ -121,12 +122,18 @@ function showTime() {
 
 }
 function insertWeather(wData) {
+
   if (wData.current.is_day) {
     var wCond = weatherCond[1][weatherCond[0][wData.current.condition.code]]["d"];
   } else {
     var wCond = weatherCond[1][weatherCond[0][wData.current.condition.code]]["n"];
   }
-  document.documentElement.style.setProperty("--before-content", "url(../img/weathericons/" + wCond + ")");
+  if (weatherOn === false) {
+    weatherOn = true
+    $("#weatherDisplay").before("<img id='wDImg' class='wDImg margin-bottom margin-top' src=../img/weathericons/" + wCond + ">");
+  } else {
+    document.getElementById('wDImg').src = '../img/weathericons/' + wCond
+  }
   document.getElementById("weatherDisplay").innerText = ' ' + wData.current.feelslike_c.toString().split(".")[0] + '° C〡'
 }
 function getWeather() {
@@ -346,7 +353,7 @@ function initiateUI() {
 bgsound.play();
 bgsound.loop()
 initiateUI();
-var ws = new WebSocket("ws://127.0.0.1:5678/");
+var ws = new WebSocket("ws://127.0.0.1:20216/");
 ws.onmessage = function (event) {
   isActive = false;
   $(".uiHeadCont").fadeOut()

@@ -13,16 +13,22 @@
             "bg": "bg.jpg"
         },
         {
-            "name": "F1 2018",
-            "folder": "f12018",
-            "icon": "f12018.jpg",
-            "bg": "bg.jpg"
-        },
-        {
             "name": "FIFA19",
             "folder": "fifa19",
             "icon": "fifa19.jpg",
             "bg": "bg.png"
+        },
+        {
+            "name": "Ride 4",
+            "folder": "ride4",
+            "icon": "ride4.jpg",
+            "bg": "bg.jpg"
+        },
+        {
+            "name": "F1 2018",
+            "folder": "f12018",
+            "icon": "f12018.jpg",
+            "bg": "bg.jpg"
         },
         {
             "name": "Forza Horizon 3",
@@ -43,12 +49,6 @@
             "bg": "bg.jpg"
         },
         {
-            "name": "Ride 4",
-            "folder": "ride4",
-            "icon": "ride4.jpg",
-            "bg": "bg.jpg"
-        },
-        {
             "name": "Rocket League",
             "folder": "rocketleague",
             "icon": "rocketleague.jpg",
@@ -59,19 +59,37 @@
             "folder": "trackmanianext",
             "icon": "trackmanianext.png",
             "bg": "bg.jpg"
-        }, 
+        },
+        {
+            "name": "Discord",
+            "folder": "discord",
+            "icon": "discord.jpg",
+            "bg": "bg.jpg"
+        },
+        {
+            "name": "Spotify Music",
+            "folder": "spotify",
+            "icon": "spotify.jpg",
+            "bg": "bg.jpg"
+        },
+        {
+            "name": "Youtube Music",
+            "folder": "ytmusic",
+            "icon": "ytmusic.png",
+            "bg": "bg.jpg"
+        },
         {
             "name": "Epic Games Store",
             "folder": "epicgames",
             "icon": "epicgames.jpg",
             "bg": "bg.jpg"
-        }, 
+        },
         {
             "name": "Steam",
             "folder": "steam",
             "icon": "steam.png",
             "bg": "bg.png"
-        }, 
+        },
         {
             "name": "Ubisoft Store",
             "folder": "uplay",

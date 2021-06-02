@@ -107,11 +107,13 @@
 .wDisp {
   font-size: 8vh;
 }
+.wDImg {
+  height: 10.5vh;
+  margin-right: 0.5vw;
+}
+
 .cDisp {
   font-size: 8vh;
-}
-.wDisp::before {
-  content: var(--before-content);
 }
 .apps-slide {
   display: flex;
@@ -130,12 +132,13 @@
 .appStart {
   display: none;
   margin-top: 26vh;
-  font-size: 3vh;
-  margin-left: 6vw;
+  font-size: 3.5vh;
+  margin-left: 7vw;
   height: 4vw;
   width: 7vw;
   z-index: 13;
   position: absolute;
+  border-radius: 7vw;
 }
 .appWrapper {
   margin-left: 2vw;
@@ -166,7 +169,7 @@
   }
 }
 .background-slide {
-  display: "none";
+  display: none;
   position: absolute;
   z-index: 8;
   height: 100vh;
@@ -177,7 +180,10 @@
   background-color: black;
 }
 .appBgImg {
+  object-fit: cover;
   opacity: 0.8;
+  height: 100vh;
+  width: 100vw;
 }
 .bgDynamic {
   height: 100vh;
